@@ -1,15 +1,14 @@
 package com.ttn.linksharing
 
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DomainUnitTest
+import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
-@TestFor(Subscription)
-class SubscriptionSpec extends Specification {
+class SubscriptionSpec extends Specification implements DomainUnitTest<Subscription> {
 
     def setup() {
+        mockDomain User
+        // mockDomain Topic
     }
 
     def cleanup() {
@@ -17,6 +16,107 @@ class SubscriptionSpec extends Specification {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+        false == false
+    }
+    def "Seriousness should not be null"(){
+
+        setup:
+        String email = "himanshi.gupta@tothenew.com"
+        String password = 'him123'
+        User user = new User(email: email,userName:"himanshi123",password:password, firstName: "Himanshi", lastName: "Gupta",admin:false,active:true)
+        Topic topic=new Topic(name:"compiler",visibility: Visibility.PUBLIC,createdBy: user)
+
+        when:
+        Subscription subscription=new Subscription(seriousness:Seriousness.CASUAL, user:user,topics:topic)
+        subscription.validate()
+        topic.addToSubscriptions(subscription)
+        user.addToTopics(topic)
+        user.addToSubscriptions(subscription)
+        user.save(flush:true)
+
+        then:
+        User.count==1
+
+        when:
+        Subscription subscription1=new Subscription(seriousness:null, user:user,topics:topic)
+        subscription1.validate()
+        topic.addToSubscriptions(subscription1)
+        user.addToTopics(topic)
+        user.addToSubscriptions(subscription1)
+        user.save(flush:true)
+
+        then:
+        subscription1.errors.getFieldErrorCount('seriousness')==1
+        subscription1.errors.hasErrors()==true
+
+    }
+
+    def "User should not be able to subscribe to topic multiple times "(){
+        setup:
+        String email = "himanshi.gupta@tothenew.com"
+        String password = 'him123'
+        User user = new User(email: email,userName:"himanshi123",password:password, firstName: "Himanshi", lastName: "Gupta",admin:false,active:true)
+        Topic topic=new Topic(name:"finance",visibility: Visibility.PUBLIC,createdBy: user)
+
+        when:
+        Subscription subscription=new Subscription(seriousness:Seriousness.CASUAL, user:user,topics:topic)
+        subscription.validate()
+        topic.addToSubscriptions(subscription)
+        user.addToTopics(topic)
+        user.addToSubscriptions(subscription)
+        user.save(flush:true)
+
+        Subscription subscription1=new Subscription(seriousness:Seriousness.SERIOUS, user:user,topics:topic)
+        subscription1.validate()
+        topic.addToSubscriptions(subscription1)
+        user.addToTopics(topic)
+        user.addToSubscriptions(subscription1)
+        user.save(flush:true)
+
+
+        then:
+        subscription1.errors.getFieldErrorCount('topics')==1
+        subscription1.errors.hasErrors()==true
+    }
+
+
+    def "Topic should not be null"(){
+        setup:
+        String email = "himanshi.gupta@tothenew.com"
+        String password = 'him123'
+        User user = new User(email: email,userName:"himanshi123",password:password, firstName: "Himanshi", lastName: "Gupta",admin:false,active:true)
+        Topic topic=new Topic(name:"finance",visibility: Visibility.PUBLIC,createdBy: user)
+
+        when:
+        Subscription subscription=new Subscription(seriousness:Seriousness.CASUAL, user:user,topics:null)
+        subscription.validate()
+        topic.addToSubscriptions(subscription)
+        user.addToTopics(topic)
+        user.addToSubscriptions(subscription)
+        user.save(flush:true)
+
+        then:
+        subscription.errors.getFieldErrorCount('topics')==1
+        subscription.errors.hasErrors()==true
+    }
+
+    def "User should not be null"(){
+        setup:
+        String email = "himanshi.gupta@tothenew.com"
+        String password = 'him123'
+        User user = new User(email: email,userName:"himanshi123",password:password, firstName: "Himanshi", lastName: "Gupta",admin:false,active:true)
+        Topic topic=new Topic(name:"finance",visibility: Visibility.PUBLIC,createdBy: user)
+
+        when:
+        Subscription subscription=new Subscription(seriousness:Seriousness.CASUAL, user:null,topics:null)
+        subscription.validate()
+        topic.addToSubscriptions(subscription)
+        user.addToTopics(topic)
+        user.addToSubscriptions(subscription)
+        user.save(flush:true)
+
+        then:
+        subscription.errors.getFieldErrorCount('user')==1
+        subscription.errors.hasErrors()==true
     }
 }

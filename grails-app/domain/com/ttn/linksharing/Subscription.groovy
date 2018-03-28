@@ -2,15 +2,15 @@ package com.ttn.linksharing
 
 class Subscription {
     Date dateCreated
-    Date lastUpdated
+    //Date lastUpdated
     Seriousness seriousness
-    static belongsTo = [user: User, topic: Topic]
+    static belongsTo = [user: User, topics: Topic]
 
 
     static constraints = {
-        user(blank: false, nullable: false, unique: 'user')
-        topic(nullable: false, blank: false, unique: 'user')
-        seriousness(nullable: false, blank: false)
+        seriousness(nullable:false)
+        topics(nullable: false, unique:'user')
+        user(nullable: false)
 
     }
 }

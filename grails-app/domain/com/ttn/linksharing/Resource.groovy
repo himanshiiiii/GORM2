@@ -6,9 +6,9 @@ abstract class Resource {
     Date dateCreated
     Date lastCreated
 
-    static belongsTo = [user:User]
-    static hasMany = [ratings:ResourceRating, readingItems:ReadingItem]
-
+    static belongsTo = [user: User, topic: Topic]
+    static hasMany = [resourceRating: ResourceRating, readingItems: ReadingItem]
     static constraints = {
+        description(type: 'text')
     }
 }

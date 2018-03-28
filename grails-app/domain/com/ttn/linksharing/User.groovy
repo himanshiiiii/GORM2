@@ -1,6 +1,7 @@
 package com.ttn.linksharing
 
 class User {
+
     String email
     String userName
     String password
@@ -13,23 +14,19 @@ class User {
     Date lastUpdated
 
     String name
-
+    //List<Topic> topics
 
     static transients = ['name']
-    String getName() {
-        return "${firstName} ${lastName}"
+    static hasMany = [topics:Topic,subscriptions:Subscription,resources:Resource]/*,readingItems:ReadingItem,resources:Resource*/
+
+    static constraints = {
+        email(unique: true,email: true,blank: false,nullable: false)
+        userName(unique: true,blank: false,nullable: false)
+        password(blank: false,nullable: false,minSize: 5)
+        firstName(blank: false,nullable: false)
+        lastName(blank: false,nullable: false)
+        photo(nullable:true,sqlType:'longBlob')
+        admin(nullable:true)
+
     }
-
-
-        static hasMany = [topics:Topic, subscriptions:Subscription,readingItems:ReadingItem, resources:Resource]
-
-
-        static constraints = {
-            email(unique: true,email: true,blank: false,nullable: false)
-            password(blank: false,nullable: false,size: 5..15)
-            firstName(blank: false,nullable: false)
-            lastName(blank: false,nullable: false)
-            photo(nullable:true, sqlType:'longBlob')
-            admin(nullable:true)
-        }
-    }
+}

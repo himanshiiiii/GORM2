@@ -1,13 +1,9 @@
 package com.ttn.linksharing
 
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
- */
-@TestFor(DocumentResource)
-class DocumentResourceSpec extends Specification {
+class DocumentResourceSpec extends Specification implements DomainUnitTest<DocumentResource> {
 
     def setup() {
     }
@@ -17,6 +13,45 @@ class DocumentResourceSpec extends Specification {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+        false == false
+    }
+
+    def "filePath should not be null or blank"(){
+        setup:
+        String email = "himanshi.gupta@tothenew.com"
+        String password = 'him123'
+        User user = new User(email: email,userName:"himanshi123",password:password, firstName: "Himanshi", lastName: "Gupta",admin:false,active:true)
+        Topic topic = new Topic(name:"compiler",visibility: Visibility.PUBLIC,createdBy: user)
+
+        when:
+        DocumentResource documentResource=new DocumentResource(filePath: "/home/himanshi/IdeaProjects/LinkSharing/src/DocumentResourceFile", user:user,topic: topic,description: "DocumentResource")
+        user.addToResources(documentResource)
+        topic.addToResources(documentResource)
+        documentResource.validate()
+        user.save()
+
+        then:
+        User.count==1
+
+        when:
+        DocumentResource documentResource1=new DocumentResource(filePath: " ", user:user,topic: topic,description: "DocumentResource")
+        user.addToResources(documentResource1)
+        topic.addToResources(documentResource1)
+        documentResource1.validate()
+        user.save()
+
+        then:
+        documentResource1.errors.getFieldErrorCount('filePath')==1
+
+        when:
+        DocumentResource documentResource2=new DocumentResource(filePath: null, user:user,topic: topic,description: "DocumentResource")
+        user.addToResources(documentResource2)
+        topic.addToResources(documentResource2)
+        documentResource2.validate()
+        user.save()
+
+        then:
+        documentResource2.errors.getFieldErrorCount('filePath')==1
+
     }
 }
