@@ -13,13 +13,25 @@ class BootStrap {
         //admin
         User admin=new User(email: "admin@gmail.com",password: "admin@123",firstName: "admin",lastName: "Linksharing",userName:'adminLinksharing' , photo: 121,admin:true,active:true)
         admin.validate()
-        admin.save(flush:true)
+       // admin.save(flush:true)
+         if(admin.save()){
+            log.info("Admin Saved Successfully")
+        }
+        else {
+            log.error("error: ${admin.errors.getAllErrors()}")
+        }
 
 
         //normal
         User normal=new User(email: "himanshigupta238@gmail.com",password: "admin@123",firstName: "Himanshi",lastName: "Gupta",userName:'HimanshiGupta',photo: 122,admin:false,active:true)
         normal.validate()
-        normal.save(flush:true)
+        //normal.save(flush:true)
+        if(normal.save()){
+            log.info("Normal User Saved Successfully")
+        }
+        else {
+            log.error("error: ${normal.errors.getFieldErrors()}")
+        }
 
 
 
