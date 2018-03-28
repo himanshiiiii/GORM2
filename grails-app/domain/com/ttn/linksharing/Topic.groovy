@@ -1,8 +1,6 @@
 package com.ttn.linksharing
 
 class Topic {
-
-
     String name
     Date dateCreated
     Date lastUpdated
@@ -16,8 +14,11 @@ class Topic {
 
     def afterInsert() {
         log.info "----------Into After Insert------"
-        Topic.withNewSession{
+        Topic.withNewSession {
             Subscription subscription= new Subscription(topics: this,seriousness: Seriousness.CASUAL,user: this.createdBy)
+            subscription.validate()
+            log.error("Topic ${subscription.errors.getFieldErrors()}")
+
             subscription.save()
         }
 
