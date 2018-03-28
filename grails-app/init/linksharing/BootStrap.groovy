@@ -13,13 +13,13 @@ class BootStrap {
         //admin
         User admin=new User(email: "admin@gmail.com",password: "admin@123",firstName: "admin",lastName: "Linksharing",userName:'adminLinksharing' , photo: 121,admin:true,active:true)
         admin.validate()
-        admin.save(failOnError:true)
+        admin.save(flush:true)
 
 
         //normal
         User normal=new User(email: "himanshigupta238@gmail.com",password: "admin@123",firstName: "Himanshi",lastName: "Gupta",userName:'HimanshiGupta',photo: 122,admin:false,active:true)
         normal.validate()
-        normal.save(failOnError:true)
+        normal.save(flush:true)
 
 
 
