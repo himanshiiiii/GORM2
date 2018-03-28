@@ -150,12 +150,16 @@ class BootStrap {
                 List<Topic> topics=Topic.findAllByCreatedByNotEqual(user)
 
                 topics.each {
-                    Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, user: user, topics: it)
-                    subscription.save()
+                    if(Subscription.findAllByTopicsAndUser(it,user).size==0) {
+                        Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, user: user, topics: it)
+
+                        subscription.save()
+                    }
                 }
 
 
         }
+
 
     }
 
