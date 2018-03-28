@@ -143,21 +143,22 @@ class BootStrap {
 
     void subscribeTopicsNotCreatedByUser(){
 
-        List<User> userCount=User.getAll()
+        List<User> userList=User.getAll()
 
-        userCount.each{
+        userList.each{
             User user->
                 List<Topic> topics=Topic.findAllByCreatedByNotEqual(user)
 
                 topics.each {
                     if(Subscription.findAllByTopicsAndUser(it,user).size()==0) {
                         Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, user: user, topics: it)
-
-                        if( subscription.save())
-                            log.info("Saved Successfully")
-                        else
+                        if (subscription.save()) {
+                            it.addToSubscriptions(subscription)
+                            user.addToSubscriptions(subscription)
+                        }
+                        else {
                             log.error("Error:${subscription.errors.getAllErrors()}")
-
+                        }
                     }
                 }
 
