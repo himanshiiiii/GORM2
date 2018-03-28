@@ -9,6 +9,7 @@ class BootStrap {
         createUsers()
         createTopics()
         createResource()
+        subscribeTopicsNotCreatedByUser()
     }
 
     void createUsers() {
@@ -140,6 +141,29 @@ class BootStrap {
         }
 
 
-        def destroy = {
+    void subscribeTopicsNotCreatedByUser(){
+
+        List<User> userCount=User.getAll()
+
+        userCount.each{
+            User user->
+                List<Topic> topics=Topic.findAllByCreatedByNotEqual(user)
+
+                topics.each {
+                    Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, user: user, topics: it)
+                    subscription.save()
+                }
+
+
+        }
+
+    }
+
+
+
+
+
+
+    def destroy = {
         }
     }
