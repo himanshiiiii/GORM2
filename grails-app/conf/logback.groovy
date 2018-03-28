@@ -37,5 +37,6 @@ root(ERROR, ['STDOUT'])
 root(INFO,['STDOUT'])
 
 logger 'grails-app.controllers', INFO, ['STDOUT']
-logger 'grails-app.init',ERROR,['STDOUT']
+logger 'grails-app.init.BootStrap',ERROR,['STDOUT']
 logger 'grails-app.domain',ERROR,['STDOUT']
+logger 'grails-app.domain',INFO,['STDOUT']

@@ -8,6 +8,7 @@ class BootStrap {
     def init = { servletContext ->
         createUsers()
         createTopics()
+        createResource()
     }
 
     void createUsers() {
@@ -83,6 +84,67 @@ class BootStrap {
             }
         }
     }
+
+
+    void createResource(){
+
+        if(Resource.count()==0) {
+
+            List<Topic> topics = Topic.getAll()
+
+            topics.each {
+                Resource resource = new LinkResource(url: "https://en.wikipedia.org/wiki/Big_data", description: "${it.name} url", topic: it, user: it.createdBy)
+                Resource resource1 = new LinkResource(url: "https://www.sas.com/en_in/insights/big-data/what-is-big-data.html", description: "${it.name} bigdata", topic: it, user: it.createdBy)
+                Resource resource2 = new DocumentResource(filePath: "abcd", description: "${it.name} hello big data", user: it.createdBy, topic: it)
+                Resource resource3 = new DocumentResource(filePath: "efgh", user: it.createdBy, description: "${it.name} hello sas", topic: it)
+
+                if (resource.save()) {
+                    it.addToResources(resource)
+                    it.createdBy.addToResources(resource)
+                }
+                else {
+                    log.error("Resource Error: ${resource.errors.allErrors}")
+                }
+                if (resource1.save()) {
+                    it.addToResources(resource1)
+                    it.createdBy.addToResources(resource1)
+                }
+                else {
+                    log.error("Resource Error: ${resource1.errors.allErrors}")
+                }
+                if(resource2.save()){
+                    it.addToResources(resource2)
+                    it.createdBy.addToResources(resource2)
+
+                }
+                else{
+                    log.error("Resource Error: ${resource2.errors.allErrors}")
+
+                }
+                if(resource3.save()){
+                    it.addToResources(resource3)
+                    it.createdBy.addToResources(resource3)
+
+                }
+                else{
+                    log.error("Resource Error: ${resource3.errors.allErrors}")
+                }
+
+                it.createdBy.save()
+                it.save()
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+
+
 
         def destroy = {
         }
