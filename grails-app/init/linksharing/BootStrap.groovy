@@ -139,13 +139,6 @@ class BootStrap {
 
         }
 
-
-
-
-
-
-
-
         def destroy = {
         }
     }
