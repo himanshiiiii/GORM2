@@ -14,4 +14,15 @@ class Topic {
         visibility(nullable: false)
     }
 
+    def afterInsert() {
+        log.info "----------Into After Insert------"
+        Topic.withNewSession{
+            Subscription subscription= new Subscription(topics: this,seriousness: Seriousness.CASUAL,user: this.createdBy)
+            subscription.save()
+        }
+
+
+    }
+
+
 }

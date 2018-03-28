@@ -40,38 +40,45 @@ class BootStrap {
         userCount.each {
 
             if (Topic.findAllByCreatedBy(it).size()==0) {
-                //User normal = User.findByUserName("HimanshiGupta")
 
                 Topic topic = new Topic(name: "cloud", createdBy: it, visibility: Visibility.PUBLIC)
-                it.addToTopics(topic)
 
                 Topic topic1 = new Topic(name: "Java", createdBy: it, visibility: Visibility.PRIVATE)
-                it.addToTopics(topic1)
 
-                Topic topic2 = new Topic(name: "Bootstrap", createdBy: it, visibility: Visibility.PUBLIC)
-                it.addToTopics(topic2)
+                Topic topic2 = new Topic(name: "BootStrap", createdBy: it, visibility: Visibility.PUBLIC)
 
-                Topic topic3 = new Topic(name: "Compiler", createdBy: it, visibility: Visibility.PRIVATE)
-                it.addToTopics(topic3)
+                Topic topic3 = new Topic(name: "compiler", createdBy: it, visibility: Visibility.PRIVATE)
 
-                Topic topic4 = new Topic(name: "DataStructure", createdBy: it, visibility: Visibility.PUBLIC)
-                it.addToTopics(topic4)
+                Topic topic4 = new Topic(name: "Datastructure", createdBy: it, visibility: Visibility.PUBLIC)
 
-                topic.validate()
-                log.error("Topic ${topic.errors.getFieldErrors()}")
-                topic.save()
-                topic1.validate()
-                log.error("Topic ${topic1.errors.getFieldErrors()}")
-                topic1.save()
-                topic2.validate()
-                log.error("Topic ${topic2.errors.getFieldErrors()}")
-                topic2.save()
-                topic3.validate()
-                log.error("Topic ${topic3.errors.getFieldErrors()}")
-                topic3.save()
-                topic4.validate()
-                log.error("Topic ${topic4.errors.getFieldErrors()}")
-                topic4.save()
+
+                if(topic.save())
+                    it.addToTopics(topic)
+
+                if(topic1.save())
+                    it.addToTopics(topic1)
+
+                if(topic2.save())
+                    it.addToTopics(topic2)
+
+                if(topic3.save())
+                    it.addToTopics(topic3)
+
+                if(topic4.save())
+                    it.addToTopics(topic4)
+
+
+                else {
+                    log.error("Topic ${topic.errors.getFieldErrors()}")
+                    log.error("Topic ${topic1.errors.getFieldErrors()}")
+                    log.error("Topic ${topic2.errors.getFieldErrors()}")
+                    log.error("Topic ${topic3.errors.getFieldErrors()}")
+                    log.error("Topic ${topic4.errors.getFieldErrors()}")
+
+                }
+                it.save()
+                log.info("Topics Saved Successfully")
+
 
             }
         }
