@@ -7,7 +7,7 @@ class User {
     String password
     String firstName
     String lastName
-    byte photo
+   // byte photo
     boolean admin
     boolean active
     Date dateCreated
@@ -25,8 +25,16 @@ class User {
         password(blank: false,nullable: false,minSize: 5)
         firstName(blank: false,nullable: false)
         lastName(blank: false,nullable: false)
-        photo(nullable:true,sqlType:'longBlob')
+        //photo(nullable:true,sqlType:'longBlob')
         admin(nullable:true)
 
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                '}';
     }
 }
