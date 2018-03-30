@@ -17,7 +17,7 @@ class User {
     //List<Topic> topics
 
     static transients = ['name']
-    static hasMany = [topics:Topic,subscriptions:Subscription,resources:Resource]/*,readingItems:ReadingItem,resources:Resource*/
+    static hasMany = [topics:Topic,subscriptions:Subscription,resources:Resource,readingItems:ReadingItem]
 
     static constraints = {
         email(unique: true,email: true,blank: false,nullable: false)

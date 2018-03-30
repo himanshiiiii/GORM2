@@ -1,22 +1,15 @@
 package com.ttn.linksharing
 
 class ResourceRating {
-    User createdBy
-    Resource resource
     Integer score
-    Date dateCreated
-    Date lastUpdated
 
-    static belongsTo = [user: User, resource: Resource]
-
+    static belongsTo = [resource:Resource,user:User]
     static constraints = {
         score( validator: {
             return it >= 1 &&  it<= 5
         })
-        user(nullable: false,blank: false,unique: 'resource')
-        resource(nullable: false,blank:false)
-
-
+        user(nullable: false,blank: false)
+        resource(nullable: false,blank:false,unique: 'user')
 
     }
 }
