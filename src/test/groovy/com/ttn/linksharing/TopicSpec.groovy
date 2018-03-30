@@ -128,4 +128,26 @@ class TopicSpec extends Specification implements DomainUnitTest<Topic>{
 
     }
 
+
+    def "To check to string "(){
+
+        setup:
+        String email = "himanshi.gupta@tothenew.com"
+        String password = 'him123'
+        User user = new User(email: email,userName:"himanshi123",password:password, firstName: "Himanshi", lastName: "Gupta",admin:false,active:true)
+        Topic topic=new Topic (name:"topic",createdBy: null,visibility: Visibility.PUBLIC)
+
+        when:
+        topic.save()
+
+        then:
+        topic.toString()==
+                "Topic{name='${topic.name}'}"
+
+
+
+
+    }
+
+
 }
