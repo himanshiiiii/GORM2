@@ -12,6 +12,7 @@ class BootStrap {
         subscribeTopicsNotCreatedByUser()
         createReadingItems()
         createReadingItemIfItDoesNotExistsInUsersReadingItem()
+        createResourceRating()
 
     }
 
@@ -182,6 +183,7 @@ class BootStrap {
             }
         }
 
+//question24
 
     void createReadingItemIfItDoesNotExistsInUsersReadingItem(User user,Topic topic)
     {
@@ -196,6 +198,17 @@ class BootStrap {
             else{
                 log.error("Error: ${readingItem.errors.getAllErrors()}")
             }
+        }
+    }
+
+
+
+//question25
+    void createResourceRating(){
+        List<Resource> resource=Resource.getAll()
+        resource.each {
+            ResourceRating resourceRating=new ResourceRating(user: it.user,resource:it,score: 3)
+            resourceRating.save()
         }
     }
 
