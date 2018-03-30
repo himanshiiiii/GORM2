@@ -54,4 +54,22 @@ class DocumentResourceSpec extends Specification implements DomainUnitTest<Docum
         documentResource2.errors.getFieldErrorCount('filePath')==1
 
     }
+
+
+
+    def "check to string of documentResource"(){
+        setup:
+        String email = "prachijulka@tothenew.com"
+        String password = 'p1231'
+        User user = new User(email: email,userName:"prachiJ",password:password, firstName: "Prachi", lastName: "Julka",admin:false,active:true)
+        Topic topic = new Topic(name:"sd",visibility: Visibility.PUBLIC,createdBy: user)
+        DocumentResource documentResource2=new DocumentResource(filePath: "dfvndkjvndknvkdf", user:user,topic: topic,description: "aaaaaaa")
+
+        when:
+        documentResource2.save()
+        then:
+        documentResource2.toString()==
+                "DocumentResource{filePath='${documentResource2.filePath}'}"
+
+    }
 }

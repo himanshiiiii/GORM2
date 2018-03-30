@@ -51,4 +51,21 @@ class LinkResourceSpec extends Specification implements DomainUnitTest<LinkResou
     }
 
 
+    def "check tostring of linkresource"(){
+        setup:
+        String email = "himanshi.guptaa@tothenew.com"
+        String password = 'him123'
+        User user = new User(email: email,userName:"himanshi123",password:password, firstName: "Himanshi", lastName: "Gupta",admin:false,active:true)
+        Topic topic = new Topic(name:"sd",visibility: Visibility.PUBLIC,createdBy: user)
+        LinkResource linkResource=new LinkResource(url:"www.google.com", user:user,topic: topic,description: "aaaaaaa")
+
+        when:
+        linkResource.save()
+        then:
+        linkResource.toString()==
+                "LinkResource{url='${linkResource.url}'}"
+
+    }
+
+
 }
