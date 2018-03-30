@@ -7,14 +7,14 @@ class User {
     String password
     String firstName
     String lastName
-   // byte photo
+    byte photo
     boolean admin
     boolean active
     Date dateCreated
     Date lastUpdated
 
     String name
-    //List<Topic> topics
+    List<Topic> topics
 
     static transients = ['name']
     static hasMany = [topics:Topic,subscriptions:Subscription,resources:Resource,readingItems:ReadingItem]

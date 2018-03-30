@@ -94,19 +94,18 @@ endpoints:
 hibernate:
     cache:
         queries: false
-        use_second_level_cache: true
+        use_second_level_cache: false
         use_query_cache: false
-        region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
-    environments:
-        development:
-                 dataSource:
-                    driverClassName: com.mysql.jdbc.Driver
-                    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-                    username: root
-                    password: mysql
-                    dbCreate: create-drop
-                    url: jdbc:mysql://localhost:3306/linksharing
+environments:
+    development:
+        dataSource:
+            driverClassName: com.mysql.jdbc.Driver
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+            username: root
+            password: mysql
+            dbCreate: create-drop
+            url: jdbc:mysql://localhost:3306/linksharing
     test:
         dataSource:
             dbCreate: update

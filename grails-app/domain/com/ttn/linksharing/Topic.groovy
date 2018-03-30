@@ -15,7 +15,7 @@ class Topic {
     def afterInsert() {
         log.info "----------Into After Insert------"
         Topic.withNewSession {
-            Subscription subscription= new Subscription(topics: this,seriousness: Seriousness.VERYSERIOUS,user: this.createdBy)
+            Subscription subscription= new Subscription(topic: this,seriousness: Seriousness.VERYSERIOUS,user: this.createdBy)
             subscription.validate()
             log.error("Topic ${subscription.errors.getFieldErrors()}")
 
