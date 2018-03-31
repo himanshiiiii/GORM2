@@ -14,10 +14,11 @@ class TopicController {
     }
 
 
-    def save(Topic topic) {
-        if (topic.save()) {
+    def save(Topic topic,String seriousness){
+        if(topic.save()){
             render("saved Successfully")
-        } else {
+        }
+        else{
             render("error")
         }
 
