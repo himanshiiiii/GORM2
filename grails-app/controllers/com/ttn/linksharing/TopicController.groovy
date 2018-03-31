@@ -14,6 +14,10 @@ class TopicController {
 
     def delete(Integer id){
         Topic topic=Topic.load(id)
+        if(topic.discard())
+            render("Successfully Deleted")
+        else
+            render("Error")
     }
 
     def save(Topic topic,String seriousness){
