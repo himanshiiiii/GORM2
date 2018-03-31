@@ -6,7 +6,9 @@ class TopicController {
 
 
     def show() {
-        Topic topic = Topic.read()
+        User user=User.read(session.user.id)
+        //println user.topics
+        render(user.topics)
     }
 
     def delete(Integer id) {
