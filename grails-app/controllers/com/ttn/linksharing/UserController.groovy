@@ -7,13 +7,15 @@ class UserController {
     }
 
     def show(Integer id){
-        if(!Topic.findByIdAndVisibility(id,Visibility.PUBLIC)) {
-            flash.error="No Topics Found"
-            redirect(controller:"login",action:"index")
+        Topic topic=Topic.get(id)
+        if(topic.visibility==Visibility.PUBLIC) {
+            render("success")
         }
-
-        render("sucess")
-
-
+        else{
+            if(Subscription.findByTopicAndUser(topic,session.user))
+                render("Subscription Exists")
+            else
+                render("Subscription does not exists")
+        }
     }
 }
