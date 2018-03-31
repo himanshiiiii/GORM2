@@ -4,13 +4,10 @@ class LoginController {
     def index() {
 
         if (session.user)
-        {
             forward(controller: 'user', action: 'index')
-        }
         else {
-            if(flash.error)
-                render(view: "index")
-            else
+            if(!flash.error)
+
                 render("failure")
         }
     }
@@ -24,6 +21,7 @@ class LoginController {
         println(userName)
         User user = User.findByUserNameAndPassword(userName, password)
         if(user!=null) {
+
             if(user.active) {
                 session.user=user
             }
@@ -32,7 +30,12 @@ class LoginController {
 
             }
         }
-        redirect(action: 'index')
+        else
+        {
+            flash.error="User not found"
+        }
+        redirect(action:'index')
+
     }
 
 
