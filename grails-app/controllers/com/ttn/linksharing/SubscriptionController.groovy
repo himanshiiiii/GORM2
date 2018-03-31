@@ -28,7 +28,16 @@ class SubscriptionController {
 
     }
 
-    def update(){
-
+    def update(Integer id,String serious){
+        Subscription subscription=Subscription.findByIdAndSeriousness(id,Seriousness.valueOf(serious))
+        if(subscription!=null)
+        {
+            if(subscription.save(flush:true))
+                render("success")
+            else
+                render("failure")
+        }
+        else
+            render("not found")
     }
 }
