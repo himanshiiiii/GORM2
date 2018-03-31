@@ -3,11 +3,11 @@ package com.ttn.linksharing
     enum Visibility {
 
         PUBLIC, PRIVATE
-        Date dateCreated
-        Date lastUpdated
 
 
-        static constraints = {
+        static Visibility stringToEnum(String visibility){
+            return Visibility.valueOf(visibility)
+
         }
 
     }
