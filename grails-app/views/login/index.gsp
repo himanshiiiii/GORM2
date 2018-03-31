@@ -3,8 +3,13 @@
 <head>
     <title></title>
 </head>
-hello
+
 <body>
+hello
+%{--<g:if test="${flash.error}">--}%
+${keyFail}
+${flash.error}
+%{--</g:if>--}%
 
 </body>
 </html>

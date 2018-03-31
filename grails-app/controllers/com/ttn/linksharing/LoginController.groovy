@@ -1,32 +1,38 @@
 package com.ttn.linksharing
 
 class LoginController {
-
     def index() {
 
-        if(session.user)
-            forward(controller: 'login',action:'index')
-        else
-            render( 'failure')
-
+        if (session.user)
+        {
+            forward(controller: 'user', action: 'index')
+        }
+        else {
+            if(flash.error)
+                render(view: "index")
+            else
+                render("failure")
+        }
     }
 
-    def logout(){
+    def logout() {
         session.invalidate()
-        redirect(action:'index')
+        redirect(action: 'index')
     }
 
-    def loginHandler(String userName,String password){
+    def loginHandler(String userName, String password) {
         println(userName)
-        User user=User.findByUserNameAndPassword(userName,password)
+        User user = User.findByUserNameAndPassword(userName, password)
         if(user!=null) {
             if(user.active) {
                 session.user=user
-                redirect(action: 'index')
+            }
+            else {
+                flash.error = "Your account is not active"
+
             }
         }
-        else
-            redirect(action:'index')
+        redirect(action: 'index')
     }
 
 
