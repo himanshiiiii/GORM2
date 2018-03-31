@@ -42,7 +42,8 @@ class LoginController {
     def register(){
 
         //admin
-        User admin = new User(email: "admin@gmail.com", password: DefaultPassword.PASSWORD, firstName: "admin", lastName: "portal", userName: 'adminPortal', photo: 121, admin: true, active: true)
+        User admin = new User(firstName: params.firstName, lastName: params.lastName, email: params.email,
+                userName: params.userName , password: params.password,confirmPassword: params.confirmPassword)
         if(admin.validate()){
             log.info("admin registered successfully! ${admin.save(flush:true, failOnError : true)}")
             render("Success")
@@ -58,7 +59,8 @@ class LoginController {
 
 
         //normal
-        User normal = new User(email: "himanshigupta238@gmail.com", password: DefaultPassword.PASSWORD, firstName: "Himanshi", lastName: "Gupta", userName: 'HimanshiGupta', photo: 122, admin: false, active: true)
+        User normal = new User(firstName: params.firstName, lastName: params.lastName, email: params.email,
+                userName: params.userName , password: params.password,confirmPassword: params.confirmPassword)
         if(normal.validate()){
             log.info("normal user registered successfully! ${normal.save(flush:true, failOnError : true)}")
             render("Success")
