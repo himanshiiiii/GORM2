@@ -73,7 +73,7 @@ class LoginControllerSpec extends Specification implements ControllerUnitTest<Lo
     def "check if user exists and is active"() {
         given:
         User user = new User(email: "himanshigupta238@gmail.com", userName: "Himanshi", password: "mysql",
-                firstName: "Himanshi", lastName: "Himanshi", admin: false, active: true, photo: 101)
+                firstName: "Himanshi", lastName: "Gupta", admin: false, active: true, photo: 101)
         user.save(flush: true)
 
         when:
@@ -82,5 +82,24 @@ class LoginControllerSpec extends Specification implements ControllerUnitTest<Lo
         then:
         response.forwardedUrl == '/user/index'
     }
+
+
+    def "topic should be saved on save action"() {
+        given:
+        User user = new User(email: "himanshigupta238@gmail.com", userName: "Himanshi", password: "mysql",
+                firstName: "Himanshi", lastName: "Gupta", admin: false, active: true, photo: 101)
+
+        session.user=user
+        Topic topic=new Topic(name: "topic20",visibility:Visibility.PUBLIC,createdBy: session.user)
+        when:
+        controller.save(topic, "Casual")
+
+        then:
+        println(topic.createdBy)
+        response.contentAsString == "saved Successfully"
+
+
+    }
+
 
 }
