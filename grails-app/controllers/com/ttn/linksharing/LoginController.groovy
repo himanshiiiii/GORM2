@@ -1,6 +1,7 @@
 package com.ttn.linksharing
 
 import constant.DefaultPassword
+import org.grails.buffer.StreamCharBuffer
 
 class LoginController {
     def index() {
@@ -39,21 +40,33 @@ class LoginController {
 
 
     def register(){
+
+        //admin
         User admin = new User(email: "admin@gmail.com", password: DefaultPassword.PASSWORD, firstName: "admin", lastName: "portal", userName: 'adminPortal', photo: 121, admin: true, active: true)
-        if(admin.save()){
-            flash.message="Admin Saved Successfully"
+        if(admin.validate()){
+            log.info("admin registered successfully! ${admin.save(flush:true, failOnError : true)}")
+            render("Success")
         }
         else {
-            flash.error="error"
+            flash.message = "flash message is set"
+            def msg = new StreamCharBuffer(message("admin not save", admin))
+            render(msg)
         }
+
+
+
+
 
         //normal
         User normal = new User(email: "himanshigupta238@gmail.com", password: DefaultPassword.PASSWORD, firstName: "Himanshi", lastName: "Gupta", userName: 'HimanshiGupta', photo: 122, admin: false, active: true)
-        if(normal.save()){
-            flash.message="Normal User Saved Successfully"
+        if(normal.validate()){
+            log.info("normal user registered successfully! ${normal.save(flush:true, failOnError : true)}")
+            render("Success")
         }
         else {
-            flash.error="error"
+            flash.message = "flash message is set"
+            def msg = new StreamCharBuffer(message("normal not save", normal))
+            render(msg)
         }
 
         redirect(action: "index")
