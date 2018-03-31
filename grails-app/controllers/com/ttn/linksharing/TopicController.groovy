@@ -26,7 +26,7 @@ class TopicController {
         }
         else{
             flash.error="Error"
-            render(view:"index")
+            render("Error")
         }
 
 
