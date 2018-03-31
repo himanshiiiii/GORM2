@@ -13,6 +13,7 @@ class BootStrap {
         createReadingItems()
         createResourceRating()
         question27()
+        q1()
 
 //        FIX method arguments here
 //        createReadingItemIfItDoesNotExistsInUsersReadingItem()
@@ -250,6 +251,11 @@ class BootStrap {
     }
 
 
+    void q1(){
+
+        println User.findAll()
+        println Topic.findAll()
+    }
 
 
     def destroy = {
