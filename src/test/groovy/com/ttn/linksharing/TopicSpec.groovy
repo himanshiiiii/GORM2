@@ -149,5 +149,22 @@ class TopicSpec extends Specification implements DomainUnitTest<Topic>{
 
     }
 
+    def "String value should be converted to enum"(){
+        given:
+        String PUBLIC="PUBLIC"
+        when:
+        Visibility visibility=Visibility.stringToEnum(PUBLIC)
+
+        then:
+        visibility==Visibility.PUBLIC
+    }
+
+    def "String value should be converted to seriousness Enum"(){
+        when:
+        Seriousness seriousness= Seriousness.stringToEnum("casual")
+
+        then:
+        seriousness==Seriousness.CASUAL
+    }
 
 }
