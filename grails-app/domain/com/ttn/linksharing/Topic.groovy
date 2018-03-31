@@ -12,9 +12,10 @@ class Topic {
         visibility(nullable: false)
     }
 
-        static mapping = {
-           sort("name":'asc')
-        }
+    static mapping = {
+        sort("name": "asc")
+        subscriptions lazy: false
+    }
 
 
     def afterInsert() {

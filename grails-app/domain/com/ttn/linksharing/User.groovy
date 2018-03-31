@@ -38,7 +38,8 @@ class User {
 
 
     static mapping = {
-        sort(id:'desc')
+        sort("id":"desc")
+        subscriptions lazy: false
     }
 
 

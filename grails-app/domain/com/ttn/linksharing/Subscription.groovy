@@ -12,11 +12,12 @@ class Subscription {
         seriousness(nullable:false)
         topic(nullable: false, unique:'user')
         user(nullable: false)
-
     }
 
 
     static mapping = {
-        seriousness defaultValue: Seriousness.SERIOUS
+            seriousness defaultValue: Seriousness.SERIOUS
+            topic fetch:'join'
+            user fetch: 'join'
+        }
     }
-}
