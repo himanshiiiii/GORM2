@@ -17,9 +17,16 @@ class LoginController {
     }
 
     def loginHandler(String userName,String password){
-
-
-        redirect(action:'index')
+        println(userName)
+        User user=User.findByUserNameAndPassword(userName,password)
+        if(user!=null) {
+            if(user.active) {
+                session.user=user
+                redirect(action: 'index')
+            }
+        }
+        else
+            redirect(action:'index')
     }
 
 
