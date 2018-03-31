@@ -11,6 +11,8 @@ class BootStrap {
         createResource()
         subscribeTopicsNotCreatedByUser()
         createReadingItems()
+        createResourceRating()
+        question27()
 
 //        FIX method arguments here
 //        createReadingItemIfItDoesNotExistsInUsersReadingItem()
@@ -184,7 +186,7 @@ class BootStrap {
             }
         }
 
-
+//question 24
     void createReadingItemIfItDoesNotExistsInUsersReadingItem(User user,Topic topic)
     {
         topic.resources.each {
