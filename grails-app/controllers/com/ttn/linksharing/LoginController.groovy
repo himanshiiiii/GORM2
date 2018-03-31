@@ -1,5 +1,7 @@
 package com.ttn.linksharing
 
+import constant.DefaultPassword
+
 class LoginController {
     def index() {
 
@@ -34,6 +36,29 @@ class LoginController {
 
 
     }
+
+
+    def register(){
+        User admin = new User(email: "admin@gmail.com", password: DefaultPassword.PASSWORD, firstName: "admin", lastName: "portal", userName: 'adminPortal', photo: 121, admin: true, active: true)
+        if(admin.save()){
+            flash.message="Admin Saved Successfully"
+        }
+        else {
+            flash.error="error"
+        }
+
+        //normal
+        User normal = new User(email: "himanshigupta238@gmail.com", password: DefaultPassword.PASSWORD, firstName: "Himanshi", lastName: "Gupta", userName: 'HimanshiGupta', photo: 122, admin: false, active: true)
+        if(normal.save()){
+            flash.message="Normal User Saved Successfully"
+        }
+        else {
+            flash.error="error"
+        }
+
+        redirect(action: "index")
+    }
+
 
 
 }
