@@ -19,5 +19,5 @@ package com.ttn.linksharing
             values().find { it.name == name }
         }
 
-        Visibility.valueOfName("public")
+        //Visibility.valueOfName("public")
     }
