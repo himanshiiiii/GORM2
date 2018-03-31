@@ -3,7 +3,10 @@ package com.ttn.linksharing
 class UserController {
 
     def index() {
+        render(session.user.userName)
+    }
 
-        render("user dashboard")
+    def show(Integer id){
+
     }
 }
