@@ -12,9 +12,14 @@ class Topic {
         visibility(nullable: false)
     }
 
+        static mapping = {
+           sort("name":'asc')
+        }
+
+
     def afterInsert() {
         log.info "----------Into After Insert------"
-        Topic.withNewSession {
+        Topic.withNewSession{
             Subscription subscription= new Subscription(topic: this,seriousness: Seriousness.VERYSERIOUS,user: this.createdBy)
             subscription.validate()
             log.error("Topic ${subscription.errors.getFieldErrors()}")
