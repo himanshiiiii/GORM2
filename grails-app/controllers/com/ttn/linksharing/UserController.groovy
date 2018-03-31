@@ -7,12 +7,13 @@ class UserController {
     }
 
     def show(Integer id){
-        if(Topic.findAllById(id).size()==0) {
+        if(!Topic.findByIdAndVisibility(id,Visibility.PUBLIC)) {
             flash.error="No Topics Found"
             redirect(controller:"login",action:"index")
         }
 
-        render("Topics Found")
+        render("sucess")
+
 
     }
 }
