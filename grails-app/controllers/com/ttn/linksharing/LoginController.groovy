@@ -2,13 +2,22 @@ package com.ttn.linksharing
 
 class LoginController {
 
-    def index() { }
+    def index() {
+
+        if(session.user)
+            forward(controller: 'login',action:'index')
+        else
+            render( 'failure')
+
+    }
 
     def logout(){
-        redirect(action:'index')
+        redirect(action:'/')
     }
 
     def loginHandler(){
+
+
         redirect(action:'index')
     }
 
