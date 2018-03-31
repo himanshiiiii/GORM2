@@ -5,7 +5,13 @@ class SubscriptionController {
     def index() { }
 
 
-    def save(){
+    def save(Integer id){
+        Topic topic=Topic.read(id)
+        Subscription subscription=new Subscription(user: session.user,topics:topic)
+        if(subscription.save())
+            render("success")
+        else
+            render("error")
 
     }
 
