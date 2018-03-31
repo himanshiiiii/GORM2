@@ -14,4 +14,9 @@ class Subscription {
         user(nullable: false)
 
     }
+
+
+    static mapping = {
+        seriousness defaultValue: Seriousness.SERIOUS
+    }
 }
