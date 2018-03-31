@@ -287,7 +287,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
     def "To check to String"() {
 
         setup:
-        String email = "himanshigupta@tothenew.com"
+        String email = "himanshi.gupta@tothenew.com"
         String password = 'him123'
         User user = new User(email: email, userName: "himanshi123", password: password, firstName: "Himanshi", lastName: "Gupta", admin: false, active: true)
 
@@ -300,5 +300,31 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
 
 
     }
+
+    def " password and confirm passowrd should match"(){
+        setup:
+        String email = "himanshi.gupta@tothenew.com"
+        String password = 'him123456'
+
+        when:
+        User user = new User(email: email,userName:"himanshi123",
+                password:password,confirmPassword: password, firstName: "Himanshi",
+                lastName: "Gupta",admin:false,active:true)
+        user.save()
+        then:
+
+        User.count()==1
+
+        when:
+        User user1 = new User(email: email,userName:"himanshi123",
+                password:password,confirmPassword: "123", firstName: "Himanshi",
+                lastName: "Gupta",admin:false,active:true)
+        user1.save()
+
+        then:
+        user1.errors.getFieldErrorCount('password')==1
+
+    }
+
 
 }
