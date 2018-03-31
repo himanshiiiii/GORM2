@@ -21,7 +21,8 @@ class TopicController {
             render("saved Successfully")
         }
         else{
-            render("error")
+            flash.error="Error"
+            render(view:"index")
         }
 
 
