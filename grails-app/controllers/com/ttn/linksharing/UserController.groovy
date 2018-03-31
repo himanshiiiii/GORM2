@@ -15,7 +15,10 @@ class UserController {
             if(Subscription.findByTopicAndUser(topic,session.user))
                 render("Subscription Exists")
             else
-                render("Subscription does not exists")
+            {
+                flash.error="Subscription does not exists"
+                redirect(action:"login/index")
+            }
         }
     }
 }
