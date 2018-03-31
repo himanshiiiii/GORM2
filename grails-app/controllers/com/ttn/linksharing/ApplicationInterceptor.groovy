@@ -10,11 +10,14 @@ class ApplicationInterceptor {
     }
 
     boolean before() {
-        log.info("ACTION AND CONTROLLER LOG: ${params.toString()}")
-        true
+        if (!session.user) {
+            flash.error= "NO ACTIVE SESSION"
+            return false
+        }
+        return true
     }
-
     boolean after() {
+
         log.info("ACTION AND CONTROLLER LOG: ${params.toString()}")
         true
     }
