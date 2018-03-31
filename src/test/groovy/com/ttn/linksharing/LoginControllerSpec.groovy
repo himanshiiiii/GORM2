@@ -5,8 +5,6 @@ import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
 
-
-//Delete existing index.gsp file Added test cases for login controller
 class LoginControllerSpec extends Specification implements ControllerUnitTest<LoginController>,DomainUnitTest<User> {
 
     def setup() {
