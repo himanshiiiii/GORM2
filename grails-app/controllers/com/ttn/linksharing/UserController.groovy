@@ -1,6 +1,6 @@
 package com.ttn.linksharing
 
-class UserController {
+class UserController{
 
     def index() {
         render(session.user.userName)
