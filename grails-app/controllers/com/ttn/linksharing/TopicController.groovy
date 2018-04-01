@@ -1,11 +1,13 @@
 package com.ttn.linksharing
 
+import co.ResourceSearchCO
+
 class TopicController {
 
     def index() {}
 
 
-    def show(){
+    def show(ResourceSearchCO resourceSearchCO, Long id){
 
         User user=User.read(session.user.id)
         //println user.topics
