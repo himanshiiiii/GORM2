@@ -14,10 +14,11 @@ class ResourceController {
 
         Resource resource=Resource.load(id)
         println resource
+
     }
     def handleObjectNotFoundException(ObjectNotFoundException e) {
 
-        render ("no object found")
+        render ("no object found ")
     }
     def search(){
         ResourceSearchCO resourceSearchCO=new ResourceSearchCO()
@@ -26,10 +27,10 @@ class ResourceController {
     }
     def show(Integer id){
         Resource resource=Resource.get(id)
-        SearchCO searchCO=new SearchCO(q:"dcdcsd")
+        SearchCO searchCO=new SearchCO(q:"sdcbdbdd")
         RatingInfoVO ratingInfoVO= resource.getRatingInfoVo(resource)
-        println ("------------ ${resource.topPost()}")
-        println ("============ ${session.user.getUnreadResource(searchCO)}")
+        println ("-----topost------- ${resource.topPost()}")
+        println ("===unread=== ${session.user.getUnreadResource(searchCO)}")
         render(ratingInfoVO.averagescore)
         // println Topic.getTrendingTopics()
     }

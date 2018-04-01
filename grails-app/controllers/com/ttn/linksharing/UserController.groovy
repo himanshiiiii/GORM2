@@ -15,7 +15,7 @@ class UserController{
 
         Topic topic=Topic.get(id)
         if(topic.visibility==Visibility.PUBLIC) {
-            render("success")
+            render("success :)")
         }
         else{
             if(Subscription.findByTopicAndUser(topic,session.user))

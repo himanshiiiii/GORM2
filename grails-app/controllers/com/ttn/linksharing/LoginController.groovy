@@ -26,13 +26,13 @@ class LoginController {
 
             }
             else {
-                flash.error = "Your account is not active"
+                flash.error = "Your account is Not Active"
 
             }
         }
         else
         {
-            flash.error="User not found"
+            flash.error="User Not Found"
         }
         render(view:'index')
 
