@@ -8,18 +8,16 @@ class ResourceController {
 
     def index() { }
 
+
     def delete(Integer id){
+
         Resource resource=Resource.load(id)
         println resource
     }
-
-
     def handleObjectNotFoundException(ObjectNotFoundException e) {
 
         render ("no object found")
     }
-
-
     def search(){
         ResourceSearchCO resourceSearchCO=new ResourceSearchCO()
         if(resourceSearchCO.q)
@@ -31,6 +29,7 @@ class ResourceController {
         Resource resource=Resource.get(id)
         RatingInfoVO ratingInfoVO= resource.getRatingInfoVo(resource)
         render(ratingInfoVO.averagescore)
+        println Topic.getTrendingTopics()
     }
     def handleNullPointerException(NullPointerException e) {
 
