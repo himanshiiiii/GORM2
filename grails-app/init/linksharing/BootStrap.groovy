@@ -1,5 +1,6 @@
 package com.ttn.linksharing
 
+import co.ResourceSearchCO
 import constant.DefaultPassword
 
 
@@ -15,8 +16,19 @@ class BootStrap {
         question27()
         q1()
 
-//        FIX method arguments here
+        //        FIX method arguments here
 //        createReadingItemIfItDoesNotExistsInUsersReadingItem()
+
+
+
+        ResourceSearchCO resourceSearchCO=new ResourceSearchCO(visibility: Visibility.PUBLIC)
+        log.info("-----------------------------------------")
+//       def str= Resource.search(resourceSearchCO).list()
+//        println(str)
+        Resource resource=Resource.get(5)
+        println resource.totalVotes(resource)
+        println resource.avgScore(resource)
+        println resource.totalScore(resource)
 
     }
 
