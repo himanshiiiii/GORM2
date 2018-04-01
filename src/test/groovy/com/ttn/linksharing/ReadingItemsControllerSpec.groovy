@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(Util1Controller)
-class Util1ControllerSpec extends Specification {
+@TestFor(ReadingItemsController)
+class ReadingItemsControllerSpec extends Specification {
 
     def setup() {
     }
@@ -15,8 +15,8 @@ class Util1ControllerSpec extends Specification {
     def cleanup() {
     }
 
-    /*void "test something"() {
+    void "test something"() {
         expect:"fix me"
             true == false
-    }*/
+    }
 }

@@ -2,13 +2,14 @@ package com.ttn.linksharing
 
 
 import grails.test.mixin.TestFor
+import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
- */
-@TestFor(ApplicationInterceptor)
-class ApplicationInterceptorSpec extends Specification {
+*/
+//@TestFor(ApplicationInterceptor)
+class ApplicationInterceptorSpec extends Specification implements InterceptorUnitTest<ApplicationInterceptor>{
 
     def setup() {
     }

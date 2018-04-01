@@ -13,18 +13,13 @@ appender('STDOUT', ConsoleAppender) {
     encoder(PatternLayoutEncoder) {
         charset = Charset.forName('UTF-8')
 
-        pattern ="%d{MM/dd HH:mm:ss} %-5p %c{12} - %m%n"
-
-
-
-
-//                '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} ' + // Date
-//                        '%clr(%5p) ' + // Log level
-//                        '%clr(---){faint} %clr([%15.15t]){faint} ' + // Thread
-//                        '%clr(%-40.40logger{39}){cyan} %clr(:){faint} ' + // Logger
-//                        '%m%n%wex' // Message
+        pattern =
+                '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} ' + // Date
+                        '%clr(%5p) ' + // Log level
+                        '%clr(---){faint} %clr([%15.15t]){faint} ' + // Thread
+                        '%clr(%-40.40logger{39}){cyan} %clr(:){faint} ' + // Logger
+                        '%m%n%wex' // Message
     }
-
 }
 
 def targetDir = BuildSettings.TARGET_DIR
@@ -36,10 +31,12 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
             pattern = "%level %logger - %msg%n"
         }
     }
-   // logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
+    logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
-//root(ERROR, ['STDOUT'])
-
-
 root(ERROR, ['STDOUT'])
-logger 'grails.app.controllers', INFO, ['STDOUT']
+root(INFO,['STDOUT'])
+
+logger 'grails-app.controllers', INFO, ['STDOUT']
+logger 'grails-app.init.BootStrap',ERROR,['STDOUT']
+logger 'grails-app.domain',ERROR,['STDOUT']
+logger 'grails-app.domain',INFO,['STDOUT']

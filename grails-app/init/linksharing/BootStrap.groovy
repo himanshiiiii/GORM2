@@ -44,7 +44,7 @@ class BootStrap {
         if (User.count() == 0) {
 
             //admin
-            User admin = new User(email: "admin@gmail.com", password: DefaultPassword.PASSWORD, firstName: "admin", lastName: "portal", userName: "adminPortal", /*photo: 121,*/ admin: true, active: true)
+            User admin = new User(email: "admin@gmail.com", password: DefaultPassword.PASSWORD, firstName: "admin", lastName: "portal", userName: "adminPortal", /*photo: 121,*/,confirmPassword: "DefaultPassword.PASSWORD",admin: true, active: true)
             if (admin.save()) {
                 log.info("Admin Saved Successfully")
             } else {
@@ -52,7 +52,7 @@ class BootStrap {
             }
 
             //normal
-            User normal = new User(email: "himanshigupta238@gmail.com", password: DefaultPassword.PASSWORD, firstName: "Himanshi", lastName: "Gupta", userName: "HimanshiGupta", /*photo:122,*/ admin: false, active: true)
+            User normal = new User(email: "himanshigupta238@gmail.com", password: DefaultPassword.PASSWORD, firstName: "Himanshi", lastName: "Gupta", userName: "HimanshiGupta", /*photo:122,*/confirmPassword: "DefaultPassword.PASSWORD", admin: false, active: true)
             if (normal.save()) {
                 log.info("Normal User Saved Successfully")
             } else {

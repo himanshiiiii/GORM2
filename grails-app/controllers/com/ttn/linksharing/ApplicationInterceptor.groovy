@@ -1,9 +1,9 @@
-//package com.ttn.linksharing
-//
-//
-//class ApplicationInterceptor {
-//
-//
+package com.ttn.linksharing
+
+
+class ApplicationInterceptor {
+
+
 //    ApplicationInterceptor(){
 //        matchAll()
 //
@@ -28,4 +28,4 @@
 //    void afterView() {
 //        // no-op
 //    }
-//}
+}

@@ -26,10 +26,10 @@ class User {
     static constraints = {
         email(unique: true,email: true,blank: false,nullable: false)
         userName(unique: true,blank: false,nullable: false)
-        password(blank: false,nullable: false,minSize: 5, validator: {password, obj ->
-            def password2 = obj.confirmPassword
-            password == password2 ? true : ['invalid.matchingPasswords']
-        })
+//        password(blank: false,nullable: false,minSize: 5, validator: {password, obj ->
+//            def password2 = obj.confirmPassword
+//            password == password2 ? true : ['invalid.matchingPasswords']
+//        })
         firstName(blank: false,nullable: false)
         lastName(blank: false,nullable: false)
         photo(nullable:true,sqlType:'longBlob')

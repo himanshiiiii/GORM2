@@ -1,6 +1,7 @@
 package com.ttn.linksharing
 
 import co.ResourceSearchCO
+import grails.validation.Validateable
 
 class TopicController {
 
