@@ -1,6 +1,7 @@
 package com.ttn.linksharing
 
 import co.ResourceSearchCO
+import co.SearchCO
 import org.hibernate.ObjectNotFoundException
 import vo.RatingInfoVO
 
@@ -25,9 +26,10 @@ class ResourceController {
     }
     def show(Integer id){
         Resource resource=Resource.get(id)
+        SearchCO searchCO=new SearchCO(q:"dcdcsd")
         RatingInfoVO ratingInfoVO= resource.getRatingInfoVo(resource)
         println ("------------ ${resource.topPost()}")
-
+        println ("============ ${session.user.getUnreadResource(searchCO)}")
         render(ratingInfoVO.averagescore)
         // println Topic.getTrendingTopics()
     }

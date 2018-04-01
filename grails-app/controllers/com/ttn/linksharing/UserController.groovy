@@ -1,12 +1,18 @@
 package com.ttn.linksharing
 
+import co.SearchCO
+
 class UserController{
 
-    def index() {
+    def index(SearchCO searchCO) {
+
         render(session.user.userName)
+
+        render session.user.getUnreadResource(searchCO)
     }
 
     def show(Integer id){
+
         Topic topic=Topic.get(id)
         if(topic.visibility==Visibility.PUBLIC) {
             render("success")

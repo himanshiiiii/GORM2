@@ -1,5 +1,7 @@
 package com.ttn.linksharing
 
+import co.SearchCO
+
 class User {
 
     String email
@@ -42,6 +44,19 @@ class User {
         subscriptions lazy: false
     }
 
+
+
+
+    List getUnreadResource(SearchCO searchCO){
+
+        if(searchCO.q){
+            List<ReadingItem> unReadItems= ReadingItem.createCriteria().list(max:10,offset:0){
+                ilike('resource.description',this.resources.description)
+                eq('isRead',false)
+            }
+            return  unReadItems
+        }
+    }
 
 
     @Override
